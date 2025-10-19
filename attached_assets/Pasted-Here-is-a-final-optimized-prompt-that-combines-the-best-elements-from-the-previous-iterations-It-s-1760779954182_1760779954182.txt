@@ -1,0 +1,109 @@
+Here is a final, optimized prompt that combines the best elements from the previous iterations. It's structured as a master prompt to an AI assistant to generate the entire project in a logical, step-by-step sequence.
+
+Master Prompt for AI-Driven Web App Assignment
+"You are an expert full-stack AI engineer. Your task is to generate all the necessary code and documentation to build a complete AI-driven furniture recommendation web application. Follow these instructions precisely, generating the code for each step in sequence.
+
+Project Title: AI-Powered Furniture Recommendation & Analytics App
+
+Core Technologies:
+
+Backend: FastAPI
+
+Frontend: React
+
+Vector DB: Pinecone
+
+AI Framework: LangChain
+
+GenAI Model: Google Gemini Pro
+
+Embedding Model: all-MiniLM-L6-v2
+
+Step 1: Data Analytics Notebook (notebooks/data_analytics.ipynb)
+Generate Python code for a Jupyter notebook. This code must:
+
+Import pandas and plotly.express.
+
+Load the dataset from the URL: https://drive.google.com/uc?export=download&id=1uD1UMXT2-13GQkbH9NmEOyUVI-zKyl6.
+
+Perform initial data exploration: display the head, info, and a count of missing values.
+
+Generate and display two Plotly visualizations:
+
+A bar chart for the top 10 product brands.
+
+A histogram for the distribution of product prices, excluding extreme outliers above a reasonable threshold (e.g., $3000).
+
+Include descriptive markdown cells explaining the purpose of each step.
+
+Step 2: Model Training & Vector DB Notebook (notebooks/model_training.ipynb)
+Generate Python code for a second Jupyter notebook that performs the core AI tasks. The code must:
+
+Install and import sentence-transformers, pinecone-client, and langchain.
+
+Load the same dataset.
+
+Create a combined_text column by merging title, description, brand, and material. Handle any missing values in these source columns first.
+
+Initialize the all-MiniLM-L6-v2 sentence transformer model and generate embeddings for the combined_text column.
+
+Initialize a connection to a Pinecone index named furniture-recommender using API keys from environment variables (PINECONE_API_KEY, PINECONE_ENVIRONMENT). If the index doesn't exist, create it with the correct dimension (384).
+
+Upsert all product embeddings to the Pinecone index in batches. The metadata for each vector must include the product's uniq_id, title, price, images (the image URL), and brand.
+
+Include descriptive markdown cells explaining the embedding and database upload process.
+
+Step 3: FastAPI Backend (backend/main.py)
+Generate a single Python script for the FastAPI backend named main.py. This script must:
+
+Set up a FastAPI application with CORS enabled to allow requests from the frontend.
+
+Create a POST endpoint at /recommend/. This endpoint will:
+
+Accept a user's text query.
+
+Embed the query using the all-MiniLM-L6-v2 model.
+
+Query the Pinecone index to retrieve the IDs and metadata of the top 8 similar products.
+
+For each retrieved product, use LangChain with the Google Gemini Pro model (via the langchain-google-genai library and GOOGLE_API_KEY environment variable) to generate a new, creative product description.
+
+Return a JSON list of the products, including their details and the newly generated creative description.
+
+Create a GET endpoint at /analytics/ that loads the dataset and returns a JSON object containing the total product counts for the top 10 brands and top 10 categories.
+
+Step 4: React Frontend Components
+Generate the code for the following React components.
+
+A. src/App.js Generate a React component that uses react-router-dom to set up routing for two pages: a main recommendation page at / and an analytics page at /analytics. Include a simple navigation bar.
+
+B. src/components/RecommendationPage.js Generate a React component for the main page that includes:
+
+State management for a search query, a list of product results, and a loading indicator.
+
+An input form to submit the user's query.
+
+An axios POST request to the backend's /recommend/ endpoint upon form submission.
+
+Logic to display a loading message during the API call and render the results using a ProductCard component.
+
+C. src/components/ProductCard.js Generate a reusable React component that accepts props for image_url, title, price, and creative_description, and displays them in a clean, styled card format.
+
+D. src/components/AnalyticsPage.js Generate a React component that:
+
+Fetches data from the backend's /analytics/ endpoint when it mounts.
+
+Uses the recharts library to display a BarChart for the brand data and a PieChart for the category data.
+
+Step 5: Project Documentation (README.md)
+Finally, generate a comprehensive README.md file. It must contain the following sections:
+
+Project Overview: A brief description of the application.
+
+Tech Stack: A list of all technologies used.
+
+Setup and Installation: Clear, step-by-step instructions for setting up both the backend (including requirements.txt) and frontend (including npm install).
+
+Environment Variables: A section listing all required environment variables: PINECONE_API_KEY, PINECONE_ENVIRONMENT, and GOOGLE_API_KEY.
+
+Usage: Instructions on how to run both the FastAPI and React development servers to use the app.
