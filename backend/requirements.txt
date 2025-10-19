@@ -1,0 +1,32 @@
+# Data Processing and Analytics
+pandas==2.3.3
+plotly==6.3.1
+jupyter==1.1.1
+nbformat==5.10.4
+ipykernel==7.0.1
+
+# Machine Learning and Embeddings
+sentence-transformers==5.1.1
+torch>=2.0.0
+transformers>=4.30.0
+
+# Vector Database
+pinecone==5.4.2
+
+# LangChain and GenAI
+langchain
+langchain-google-genai
+langchain-pinecone
+google-generativeai>=0.3.0
+
+# FastAPI Backend
+fastapi==0.115.7
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+python-dotenv==1.0.1
+pydantic>=2.0.0
+
+# Utilities
+requests>=2.31.0
+numpy>=1.26.4
+tqdm>=4.65.0
